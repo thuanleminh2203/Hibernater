@@ -21,9 +21,9 @@ public class Company {
 	private Integer id;
 	@Column(name = "name")
 	private String name;
-
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "company")
 	private Set<Employee> employees = new HashSet<>();
+	
 
 	public Integer getId() {
 		return id;

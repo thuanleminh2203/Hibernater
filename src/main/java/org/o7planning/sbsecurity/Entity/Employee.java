@@ -2,12 +2,15 @@ package org.o7planning.sbsecurity.Entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "employee")
@@ -18,10 +21,9 @@ public class Employee {
 	private Integer id;
 	@Column(name = "name")
 	private String name;
-//	@JsonIgnore
-//	nó bị lặp vô tận ý
-	@ManyToOne
-	@JoinColumn(name = "id_company",nullable=false)
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_company")
 	private Company company;
 
 	public Integer getId() {

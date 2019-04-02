@@ -3,6 +3,7 @@ package org.o7planning.sbsecurity.Service;
 import java.util.List;
 import java.util.Optional;
 
+import org.o7planning.sbsecurity.DAO.EmployeeDAO;
 import org.o7planning.sbsecurity.Entity.Employee;
 import org.o7planning.sbsecurity.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ public class EmployeeService {
 	
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private EmployeeDAO employeeDAO;
 	
 	public List<Employee> findAll(){
 		return employeeRepository.findAll();

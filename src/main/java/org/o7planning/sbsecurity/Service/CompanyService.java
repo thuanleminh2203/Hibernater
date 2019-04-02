@@ -20,9 +20,12 @@ public class CompanyService {
 	public List<Company> findAll(){
 		return companyRepository.findAll();
 	}
-	
 
 	public Optional<Company> findById( int id){
 		return companyRepository.findById(id);
 	}
+	public Company update(Company company) {
+		return companyRepository.save(company);
+	}
+	
 }

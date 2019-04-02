@@ -2,6 +2,7 @@ package org.o7planning.sbsecurity.Controller;
 
 import java.util.List;
 
+import org.o7planning.sbsecurity.ResourceNotFoundException;
 import org.o7planning.sbsecurity.Entity.Company;
 import org.o7planning.sbsecurity.Service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,5 +32,12 @@ public class CompanyController {
 	@GetMapping("/findById/{id}")
 	public ResponseEntity<Company> findById(@PathVariable int id){
 		return new ResponseEntity<Company>(companyService.findById(id).get(),HttpStatus.OK);
+	}
+	@PutMapping("/update/{id}/{name}")
+	public Company update(@PathVariable int id, @PathVariable String name){
+		return companyService.findById(id).map(company -> {
+			company.setName(name);
+			return companyService.update(company);
+		}).orElseThrow(() -> new ResourceNotFoundException("ID COMPANY"+id+ "NOT FOUND "));
 	}
 }

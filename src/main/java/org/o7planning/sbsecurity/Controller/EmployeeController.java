@@ -21,11 +21,15 @@ public class EmployeeController {
 
 	@GetMapping("/findAll")
 	public ResponseEntity<List<Employee>> findAll() {
+		List<Employee> employees =employeeService.findAll();
+		for (Employee employee : employees) {
+			System.out.println(employee.getCompany().getName());
+		}
 		return new ResponseEntity<List<Employee>>(employeeService.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/findById/{id}")
-	public ResponseEntity<Employee> findById(@PathVariable int id){
-		return new ResponseEntity<Employee>(employeeService.findById(id).get(),HttpStatus.OK);
+	public ResponseEntity<Employee> findById(@PathVariable int id) {
+		return new ResponseEntity<Employee>(employeeService.findById(id).get(), HttpStatus.OK);
 	}
 }
